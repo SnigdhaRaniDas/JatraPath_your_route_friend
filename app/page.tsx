@@ -12,6 +12,9 @@ export default function Home() {
           height={20}
           priority
         />
+         <h1 className="text-3xl font-bold text-blue-600">
+          Hello, Snigdha! This is my first code in Next.js.
+        </h1>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the page.tsx file.

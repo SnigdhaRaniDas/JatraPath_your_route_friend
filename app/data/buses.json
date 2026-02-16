@@ -1,0 +1,53 @@
+[
+  {
+    "id": "welcome-poribohon",
+    "name": "Welcome Poribohon",
+    "stops": [
+      "Savar",
+      "Savtoli",
+      "Kallyanpur",
+      "Farmgate",
+      "Banglamotor",
+      "Motijheel"
+    ],
+    "fareMatrix": {
+      "Savar": {
+        "Savtoli": 15,
+        "Farmgate": 30,
+        "Motijheel": 50
+      },
+      "Savtoli": {
+        "Farmgate": 20,
+        "Motijheel": 40
+      },
+      "Farmgate": {
+        "Motijheel": 25
+      }
+    }
+  },
+  {
+    "id": "rajdhani-paribohon",
+    "name": "Rajdhani Poribohon",
+    "stops": [
+      "Savar",
+      "Savtoli",
+      "Kallyanpur",
+      "Farmgate",
+      "Motijheel"
+    ],
+    "fareMatrix": {
+      "Savar": {
+        "Savtoli": 20,
+        "Farmgate": 35,
+        "Motijheel": 55
+      },
+      "Savtoli": {
+        "Farmgate": 25,
+        "Motijheel": 45
+      },
+      "Farmgate": {
+        "Motijheel": 30
+      }
+    }
+  }
+]

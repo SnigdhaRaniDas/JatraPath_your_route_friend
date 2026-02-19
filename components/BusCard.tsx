@@ -1,6 +1,6 @@
 export default function BusCard({ bus }: any) {
   return (
-    <div className="rounded-xl bg-gradient-to-b from-sky-500 to-sky-800 text-white p-5 shadow-lg">
+    <div className="rounded-xl bg-linear-to-b from-sky-500 to-sky-800 text-white p-5 shadow-lg">
       <h3 className="text-lg font-semibold">
         {bus.name}
       </h3>

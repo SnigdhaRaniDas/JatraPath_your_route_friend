@@ -1,52 +1,151 @@
 [
   {
-    "id": "welcome-poribohon",
-    "name": "Welcome Poribohon",
+    "id": "turag-transport",
+    "name": "Turag Transport",
     "stops": [
-      "Savar",
-      "Gabtoli",
+      "Dhour",
+      "Uttara",
+      "Airport",
+      "Kalshi",
+      "Pallabi",
+      "Mirpur 10",
+      "Mirpur 1",
       "Kallyanpur",
-      "Farmgate",
-      "Banglamotor",
-      "Motijheel"
+      "Shyamoli"
     ],
     "fareMatrix": {
-      "Savar": {
-        "Gabtoli": 15,
-        "Farmgate": 30,
-        "Motijheel": 50
+      "Dhour": {
+        "Uttara": 15,
+        "Airport": 25,
+        "Kalshi": 35,
+        "Pallabi": 45,
+        "Mirpur 10": 55,
+        "Mirpur 1": 60,
+        "Kallyanpur": 70,
+        "Shyamoli": 75
       },
-      "Gabtoli": {
-        "Farmgate": 20,
-        "Motijheel": 40
+      "Uttara": {
+        "Airport": 15,
+        "Kalshi": 25,
+        "Pallabi": 35,
+        "Mirpur 10": 45,
+        "Mirpur 1": 50,
+        "Kallyanpur": 60,
+        "Shyamoli": 65
       },
-      "Farmgate": {
-        "Motijheel": 25
+      "Airport": {
+        "Kalshi": 15,
+        "Pallabi": 25,
+        "Mirpur 10": 35,
+        "Mirpur 1": 40,
+        "Kallyanpur": 50,
+        "Shyamoli": 55
+      },
+      "Kalshi": {
+        "Pallabi": 15,
+        "Mirpur 10": 25,
+        "Mirpur 1": 30,
+        "Kallyanpur": 40,
+        "Shyamoli": 45
+      },
+      "Pallabi": {
+        "Mirpur 10": 15,
+        "Mirpur 1": 20,
+        "Kallyanpur": 30,
+        "Shyamoli": 35
+      },
+      "Mirpur 10": {
+        "Mirpur 1": 15,
+        "Kallyanpur": 25,
+        "Shyamoli": 30
+      },
+      "Mirpur 1": {
+        "Kallyanpur": 15,
+        "Shyamoli": 20
+      },
+      "Kallyanpur": {
+        "Shyamoli": 15
       }
     }
   },
   {
-    "id": "rajdhani-paribohon",
-    "name": "Rajdhani Poribohon",
+    "id": "bahon-paribahan",
+    "name": "Bahon Paribahan",
     "stops": [
-      "Savar",
-      "Gabtoli",
+      "Uttara",
+      "Airport",
+      "Kalshi",
+      "Pallabi",
+      "Mirpur 10",
+      "Mirpur 1",
+      "Asia Cinema Hall",
       "Kallyanpur",
-      "Farmgate",
-      "Motijheel"
+      "Shyamoli",
+      "Japan Garden City"
     ],
     "fareMatrix": {
-      "Savar": {
-        "Gabtoli": 20,
-        "Farmgate": 35,
-        "Motijheel": 55
+      "Uttara": {
+        "Airport": 15,
+        "Kalshi": 25,
+        "Pallabi": 35,
+        "Mirpur 10": 45,
+        "Mirpur 1": 50,
+        "Asia Cinema Hall": 55,
+        "Kallyanpur": 60,
+        "Shyamoli": 65,
+        "Japan Garden City": 70
       },
-      "Gabtoli": {
-        "Farmgate": 25,
-        "Motijheel": 45
+      "Airport": {
+        "Kalshi": 15,
+        "Pallabi": 25,
+        "Mirpur 10": 35,
+        "Mirpur 1": 40,
+        "Asia Cinema Hall": 45,
+        "Kallyanpur": 50,
+        "Shyamoli": 55,
+        "Japan Garden City": 60
       },
-      "Farmgate": {
-        "Motijheel": 30
+      "Kalshi": {
+        "Pallabi": 15,
+        "Mirpur 10": 25,
+        "Mirpur 1": 30,
+        "Asia Cinema Hall": 35,
+        "Kallyanpur": 40,
+        "Shyamoli": 45,
+        "Japan Garden City": 50
+      },
+      "Pallabi": {
+        "Mirpur 10": 15,
+        "Mirpur 1": 20,
+        "Asia Cinema Hall": 25,
+        "Kallyanpur": 30,
+        "Shyamoli": 35,
+        "Japan Garden City": 40
+      },
+      "Mirpur 10": {
+        "Mirpur 1": 15,
+        "Asia Cinema Hall": 20,
+        "Kallyanpur": 25,
+        "Shyamoli": 30,
+        "Japan Garden City": 35
+      },
+      "Mirpur 1": {
+        "Asia Cinema Hall": 15,
+        "Kallyanpur": 20,
+        "Shyamoli": 25,
+        "Japan Garden City": 30
+      },
+      "Asia Cinema Hall": {
+        "Kallyanpur": 15,
+        "Shyamoli": 20,
+        "Japan Garden City": 25
+      },
+      "Kallyanpur": {
+        "Shyamoli": 15,
+        "Japan Garden City": 20
+      },
+      "Shyamoli": {
+        "Japan Garden City": 15
       }
     }
   }

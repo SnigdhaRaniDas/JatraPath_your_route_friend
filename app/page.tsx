@@ -14,22 +14,39 @@ export default function Home() {
   const [searched, setSearched] = useState(false);
 
   // Called when Search button is clicked
-  async function handleSearch(from: string, to: string) {
-    try {
-      const res = await fetch(
-        `/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
-      );
+async function handleSearch(from: string, to: string) {
+  try {
+    const res = await fetch(
+      `/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
+    );
 
-      const data = await res.json();
-
-      setBuses(data);
-      setSearched(true);
-    } catch (error) {
-      console.error("Search failed", error);
+    if (!res.ok) {
+      console.error("API returned an error:", res.status);
       setBuses([]);
       setSearched(true);
+      return;
     }
+
+    // Use text first to handle empty response
+    const text = await res.text();
+
+    if (!text) {
+      console.error("API returned empty response");
+      setBuses([]);
+      setSearched(true);
+      return;
+    }
+
+    const data = JSON.parse(text);
+    setBuses(data);
+    setSearched(true);
+
+  } catch (error) {
+    console.error("Search failed", error);
+    setBuses([]);
+    setSearched(true);
   }
+}
 
   return (
     <div className="min-h-screen bg-linear-to-br from-sky-100 via-blue-100 to-sky-200">

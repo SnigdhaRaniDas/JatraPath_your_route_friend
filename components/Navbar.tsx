@@ -15,7 +15,7 @@ export default function Navbar() {
 
         <div className="flex gap-6 font-medium">
           <a href="#" className="hover:text-white transition">Home</a>
-          <a href="#find-routes" className="hover:text-white transition">Routes</a>
+          <a href="#find-routes" className="hover:text-white transition">Find Routes</a>
           <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
       </div>

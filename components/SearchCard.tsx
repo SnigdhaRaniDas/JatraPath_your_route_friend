@@ -2,6 +2,7 @@
 
 import { MapPin, RefreshCcw, Search } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function SearchCard({ onSearch }: any) {
   const [from, setFrom] = useState("");
@@ -71,16 +72,18 @@ export default function SearchCard({ onSearch }: any) {
           </div>
 
           {/* SWAP */}
-          <button
+          <motion.button
             type="button"
-            className="mt-0 sm:mt-6 rounded-full p-2 text-sky-700 hover:bg-sky-200"
             onClick={() => {
               setFrom(to);
               setTo(from);
             }}
+            whileTap={{ rotate: 180, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="mt-0 sm:mt-6 rounded-full p-2 text-sky-700 hover:bg-sky-200"
           >
             <RefreshCcw size={20} />
-          </button>
+          </motion.button>
 
           {/* TO */}
           <div className="flex-1 w-full relative">
@@ -118,16 +121,18 @@ export default function SearchCard({ onSearch }: any) {
         </div>
 
         {/* SEARCH */}
-        <button
-  className="mt-6 w-full rounded-lg bg-linear-to-r from-sky-600 to-blue-700 text-white py-3 flex items-center justify-center gap-2"
-  onClick={() => {
-    console.log("Search clicked", from, to);
-    onSearch(from, to);
-  }}
->
-  <Search size={16} />
-  Search Bus Routes
-</button>
+        <div className="mt-8 flex justify-center">
+          <button
+            className="px-8 py-3 rounded-lg bg-linear-to-r from-sky-600 to-blue-700 text-white flex items-center gap-2 hover:opacity-90 transition"
+            onClick={() => {
+              console.log("Search clicked", from, to);
+              onSearch(from, to);
+            }}
+          >
+            <Search size={16} />
+            Search Bus Routes
+          </button>
+        </div>
 
       </div>
     </div>

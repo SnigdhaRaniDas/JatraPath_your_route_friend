@@ -26,7 +26,7 @@ export default function SearchCard({ onSearch }: any) {
     <div id="find-routes" className="flex items-center justify-center px-4 py-16 scroll-mt-24">
       <div className="w-full max-w-3xl rounded-2xl bg-white/90 backdrop-blur shadow-xl p-8 ring-1 ring-sky-300">
 
-        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-sky-700 to-blue-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold text-center mb-2 bg-linear-to-r from-sky-700 to-blue-800 bg-clip-text text-transparent">
           Find Bus Routes in Dhaka, Bangladesh
         </h1>
 

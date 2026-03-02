@@ -9,10 +9,11 @@ interface BusCardProps {
 }
 
 export default function BusCard({ result, onViewDetails }: BusCardProps) {
+  // ✅ stops from new API structure
   const stops = Array.isArray(result.stops) ? result.stops : [];
   const stopsCount = stops.length;
 
-  // calculate fare from first → last stop
+  // ✅ calculate fare using fareMatrix
   const fare =
     stopsCount > 1
       ? result.fareMatrix?.[stops[0]]?.[stops[stopsCount - 1]] ?? 0
@@ -30,8 +31,10 @@ export default function BusCard({ result, onViewDetails }: BusCardProps) {
           </div>
 
           <div>
-            {/* Route Name */}
-            <h3 className="font-semibold text-lg">{result.name}</h3>
+            {/* ✅ Bus / Route Name */}
+            <h3 className="font-semibold text-lg">
+              {result.name ?? "N/A"}
+            </h3>
           </div>
         </div>
       </div>
@@ -46,7 +49,7 @@ export default function BusCard({ result, onViewDetails }: BusCardProps) {
           </div>
         )}
 
-        {/* Stops in Between */}
+        {/* Middle Stops */}
         {stopsCount > 2 && (
           <div className="ml-6 text-xs text-gray-500">
             {stopsCount - 2} stoppage
@@ -82,6 +85,7 @@ export default function BusCard({ result, onViewDetails }: BusCardProps) {
           </div>
         </div>
 
+        {/* ✅ CONNECTED BUTTON */}
         <button
           onClick={onViewDetails}
           className="text-sm text-blue-600 hover:text-blue-700 font-medium"

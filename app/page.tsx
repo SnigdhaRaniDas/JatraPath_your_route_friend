@@ -5,60 +5,69 @@ import Navbar from "@/components/Navbar";
 import SearchCard from "@/components/SearchCard";
 import AvailableRoutes from "@/components/AvailableRoutes";
 import Footer from "@/components/Footer";
+import { RouteSearchResult } from "@/type/transport";
+import { RouteDetailsModal } from "@/components/RouteDetailsmodel";
 
 export default function Home() {
-  // Stores buses returned from backend
-  const [buses, setBuses] = useState<any[]>([]);
+  const [results, setResults] = useState<RouteSearchResult[]>([]);
+  
+  const [hasSearched, setHasSearched] = useState(false);
+  const [searchFrom, setSearchFrom] = useState("");
+  const [searchTo, setSearchTo] = useState("");
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // Tracks whether user clicked Search
-  const [searched, setSearched] = useState(false);
+  async function handleSearch(from: string, to: string) {
+    try {
+      setSearchFrom(from);
+      setSearchTo(to);
 
-  // Called when Search button is clicked
-async function handleSearch(from: string, to: string) {
-  try {
-    const res = await fetch(
-      `/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
-    );
+      const res = await fetch(
+        `/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
+      );
 
-    if (!res.ok) {
-      console.error("API returned an error:", res.status);
-      setBuses([]);
-      setSearched(true);
-      return;
+      if (!res.ok) {
+        setResults([]);
+        setHasSearched(true);
+        return;
+      }
+
+      const data = await res.json();
+      setResults(data);
+      setHasSearched(true);
+
+    } catch (error) {
+      console.error("Search failed", error);
+      setResults([]);
+      setHasSearched(true);
     }
-
-    // Use text first to handle empty response
-    const text = await res.text();
-
-    if (!text) {
-      console.error("API returned empty response");
-      setBuses([]);
-      setSearched(true);
-      return;
-    }
-
-    const data = JSON.parse(text);
-    setBuses(data);
-    setSearched(true);
-
-  } catch (error) {
-    console.error("Search failed", error);
-    setBuses([]);
-    setSearched(true);
   }
-}
+
+  function handleViewDetails(result: RouteSearchResult) {
+    console.log("View details:", result);
+  }
+
+  function handleAddToFavorites() {
+    setIsFavorite(true);
+  }
 
   return (
     <div className="min-h-screen bg-linear-to-br from-sky-100 via-blue-100 to-sky-200">
       <Navbar />
 
-      {/* SEARCH SECTION */}
       <SearchCard onSearch={handleSearch} />
 
-      {/* RESULTS SECTION */}
-      <AvailableRoutes buses={buses} searched={searched} />
+      <AvailableRoutes
+        results={results}
+        hasSearched={hasSearched}
+        searchFrom={searchFrom}
+        searchTo={searchTo}
+        onViewDetails={handleViewDetails}
+        onAddToFavorites={handleAddToFavorites}
+        isFavorite={isFavorite}
+      />
 
       <Footer />
+      
     </div>
   );
 }

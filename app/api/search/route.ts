@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import buses from "@/app/data/buses.json";
+import busesData from "@/app/data/buses.json";
+import type { BusData, RouteSearchResult } from "@/type/transport";
 
-// fare rounding rule
+const buses = busesData as BusData[];
+
 function normalizeFare(fare: number) {
   return Math.round(fare / 5) * 5;
 }
@@ -16,32 +18,46 @@ export async function GET(req: Request) {
     return NextResponse.json([]);
   }
 
-  const results = buses
-    .filter(
-      (bus) =>
-        bus.stops.includes(from) &&
-        bus.stops.includes(to) &&
-        bus.stops.indexOf(from) < bus.stops.indexOf(to)
-    )
-    .map((bus) => {
-      const fromMap =
-        bus.fareMatrix[from as keyof typeof bus.fareMatrix];
+  const results: RouteSearchResult[] = [];
 
-      const rawFare = fromMap
-        ? fromMap[to as keyof typeof fromMap]
-        : undefined;
+  buses.forEach((bus) => {
+    const { id, name, stops, fareMatrix } = bus;
 
-      if (!rawFare) return null;
+    if (
+      stops.includes(from) &&
+      stops.includes(to) &&
+      fareMatrix[from]?.[to] !== undefined
+    ) {
+      const fromIndex = stops.indexOf(from);
+      const toIndex = stops.indexOf(to);
 
-      return {
-        id: bus.id,
-        name: bus.name,
-        from,
-        to,
-        fare: normalizeFare(rawFare)
-      };
-    })
-    .filter(Boolean);
+      const slicedStops =
+        fromIndex < toIndex
+          ? stops.slice(fromIndex, toIndex + 1)
+          : stops.slice(toIndex, fromIndex + 1).reverse();
+
+      const filteredFareMatrix: RouteSearchResult["fareMatrix"] = {};
+
+      slicedStops.forEach((fromStop) => {
+        filteredFareMatrix[fromStop] = {};
+
+        slicedStops.forEach((toStop) => {
+          const fare = fareMatrix[fromStop]?.[toStop];
+          if (fare !== undefined) {
+            filteredFareMatrix[fromStop][toStop] =
+              normalizeFare(fare);
+          }
+        });
+      });
+
+      results.push({
+        id,
+        name,
+        stops: slicedStops,
+        fareMatrix: filteredFareMatrix,
+      });
+    }
+  });
 
   return NextResponse.json(results);
 }

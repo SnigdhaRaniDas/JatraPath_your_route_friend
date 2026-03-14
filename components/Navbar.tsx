@@ -3,17 +3,17 @@ import Image from "next/image";
 export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Image
-            src="/image/JatraLogo.png"
-            alt="JatraPath Logo"
-            width={120}
-            height={40}
-            className="h-auto w-auto"
-          />
-        </div>
+  <Image
+    src="/image/JatraLogo.png"
+    alt="JatraPath Logo"
+    width={200}
+    height={100}
+    className="h-9 md:h-12 lg:h-10 w-auto"
+  />
+</div>
 
         {/* Links */}
         <div className="hidden md:flex gap-8 font-medium text-gray-700">

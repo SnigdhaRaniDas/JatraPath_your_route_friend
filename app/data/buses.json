@@ -22,5 +22,43 @@
       "Gulistan",
       "Sadar Ghat"
     ]
+  },
+  {
+    "id": "Etihash_Paribahan",
+    "name": "Etihash_Paribahan",
+    "stops": [
+      "Chandra",
+      "Zirani",
+      "Baipail",
+      "Nobinagar",
+      "Savar",
+      "Hemayetpur",
+      "Aminbazar",
+      "Gabtoli",
+      "Technical",
+      "Mirpur1",
+      "Mirpur10",
+      "Mirpur11",
+      "Mirpur12"
+    ]
+  },
+  {
+    "id": "Rajdhani_Paribahan",
+    "name": "Rajdhani_Paribahan",
+    "stops": [
+      "Chandra",
+      "Zirani",
+      "Baipail",
+      "Nobinagar",
+      "Savar",
+      "Hemayetpur",
+      "Aminbazar",
+      "Gabtoli",
+      "Technical",
+      "Mirpur1",
+      "Mirpur10",
+      "Mirpur11",
+      "Mirpur12"
+    ]
   }
 ]

@@ -15,7 +15,7 @@ export default function Page() {
   const stopsParam = params.get("stops");
 
   if (!bus || !stopsParam) {
-    return <div className="p-10 text-center">Missing route info</div>;
+    return <div className="p-10 text-center">Missing route</div>;
   }
 
   const stops = JSON.parse(decodeURIComponent(stopsParam));

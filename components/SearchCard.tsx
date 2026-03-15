@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function SearchCard({ onSearch }: any) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [showSwapModal, setShowSwapModal] = useState(false);
 
   const [fromList, setFromList] = useState<string[]>([]);
   const [toList, setToList] = useState<string[]>([]);
@@ -27,21 +28,20 @@ export default function SearchCard({ onSearch }: any) {
     }
   };
 
-  // Swap locations with confirm alert
-  const handleSwap = () => {
+  // Open Swap Modal
+  const handleSwapClick = () => {
     if (!from || !to) {
       alert("Both FROM and TO locations must be selected before swapping.");
       return;
     }
+    setShowSwapModal(true);
+  };
 
-    const confirmSwap = confirm(
-      `Do you want to swap the locations?\n\nFROM: ${from}\nTO: ${to}`
-    );
-
-    if (confirmSwap) {
-      setFrom(to);
-      setTo(from);
-    }
+  // Confirm Swap
+  const confirmSwap = () => {
+    setFrom(to);
+    setTo(from);
+    setShowSwapModal(false);
   };
 
   // Handle Search
@@ -62,7 +62,7 @@ export default function SearchCard({ onSearch }: any) {
   return (
     <div
       id="find-routes"
-      className="flex items-center justify-center px-4 py-16 scroll-mt-24"
+      className="flex items-center justify-center px-4 py-16 scroll-mt-24 relative"
     >
       <div className="w-full max-w-3xl rounded-2xl bg-white/90 backdrop-blur shadow-xl p-8 ring-1 ring-sky-300">
         <h1 className="text-3xl font-bold text-center mb-2 bg-linear-to-r from-sky-700 to-blue-800 bg-clip-text text-transparent">
@@ -114,7 +114,7 @@ export default function SearchCard({ onSearch }: any) {
           <div className="flex justify-center">
             <button
               type="button"
-              onClick={handleSwap}
+              onClick={handleSwapClick}
               className="p-3 rounded-full bg-white hover:bg-gray-50 shadow-md border border-gray-200 transition-all hover:scale-110"
               aria-label="Swap locations"
             >
@@ -170,6 +170,35 @@ export default function SearchCard({ onSearch }: any) {
           </button>
         </div>
       </div>
+
+      {/* Swap Confirmation Modal */}
+      {showSwapModal && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg max-w-sm w-full p-6 text-center">
+            <h2 className="text-lg font-semibold mb-4">
+              Swap Locations?
+            </h2>
+            <p className="text-gray-600 mb-6">
+              FROM: <strong>{from}</strong> <br />
+              TO: <strong>{to}</strong>
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => setShowSwapModal(false)}
+                className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmSwap}
+                className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+              >
+                Swap
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

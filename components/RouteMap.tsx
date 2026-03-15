@@ -6,7 +6,7 @@ import {
   TileLayer,
   Polyline,
   Marker,
-  Tooltip,
+  Popup,
   useMap
 } from "react-leaflet";
 
@@ -21,7 +21,32 @@ interface Props {
   stopsList: string[];
 }
 
-/* ---------- Custom stop icon (no default marker) ---------- */
+/* ---------- Start icon (Google Maps style) ---------- */
+
+const startIcon = L.divIcon({
+  className: "",
+  html: `<div style="
+    width:22px;
+    height:22px;
+    background:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 6px rgba(0,0,0,0.4);
+  ">
+    <div style="
+      width:12px;
+      height:12px;
+      background:#2563eb;
+      border-radius:50%;
+    "></div>
+  </div>`,
+  iconSize: [22,22],
+  iconAnchor: [11,11]
+});
+
+/* ---------- Stop icon ---------- */
 
 const stopIcon = L.divIcon({
   className: "",
@@ -35,6 +60,17 @@ const stopIcon = L.divIcon({
   "></div>`,
   iconSize: [10,10],
   iconAnchor: [5,5]
+});
+
+/* ---------- Destination red pin ---------- */
+
+const destinationIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+  shadowUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41]
 });
 
 /* ---------- Find closest polyline point ---------- */
@@ -60,7 +96,7 @@ function nearestIndex(point: [number, number], route: [number, number][]) {
   return bestIndex;
 }
 
-/* ---------- Auto zoom map ---------- */
+/* ---------- Auto zoom ---------- */
 
 function FitBounds({ positions }: { positions: [number, number][] }) {
 
@@ -83,8 +119,6 @@ export default function RouteMap({ busName, stopsList }: Props) {
     (buses as any[]).find((b) => b.name === busName);
 
   if (!routeData || !bus) return null;
-
-  /* convert [lng,lat] → [lat,lng] */
 
   const polyline: [number, number][] =
     routeData.map(([lng, lat]: [number, number]) => [lat, lng]);
@@ -128,32 +162,33 @@ export default function RouteMap({ busName, stopsList }: Props) {
         }}
       />
 
-      {/* Auto zoom */}
-
       <FitBounds positions={segment} />
 
       {/* Stops */}
 
-      {stopCoords.map((pos: any, i: number) => (
+      {stopCoords.map((pos: any, i: number) => {
 
-        <Marker key={i} position={pos} icon={stopIcon}>
+        const isStart = i === 0;
+        const isDestination = i === stopCoords.length - 1;
 
-          <Tooltip
-            direction="top"
-            offset={[0, -8]}
-            opacity={1}
-            permanent
-          >
+        let icon = stopIcon;
 
-            <div className="bg-white px-2 py-1 rounded shadow text-xs font-semibold text-blue-700 border border-blue-200">
-              {stopsList[i]}
-            </div>
+        if (isStart) icon = startIcon;
+        if (isDestination) icon = destinationIcon;
 
-          </Tooltip>
+        return (
+          <Marker key={i} position={pos} icon={icon}>
 
-        </Marker>
+            <Popup>
+              <div className="font-semibold text-blue-700">
+                {stopsList[i]}
+              </div>
+            </Popup>
 
-      ))}
+          </Marker>
+        );
+
+      })}
 
     </MapContainer>
   );

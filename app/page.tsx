@@ -61,7 +61,6 @@ export default function Home() {
         hasSearched={hasSearched}
         searchFrom={searchFrom}
         searchTo={searchTo}
-        onViewDetails={handleViewDetails}
         onAddToFavorites={handleAddToFavorites}
         isFavorite={isFavorite}
       />

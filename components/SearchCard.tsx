@@ -27,10 +27,21 @@ export default function SearchCard({ onSearch }: any) {
     }
   };
 
-  // Swap locations
+  // Swap locations with confirm alert
   const handleSwap = () => {
-    setFrom(to);
-    setTo(from);
+    if (!from || !to) {
+      alert("Both FROM and TO locations must be selected before swapping.");
+      return;
+    }
+
+    const confirmSwap = confirm(
+      `Do you want to swap the locations?\n\nFROM: ${from}\nTO: ${to}`
+    );
+
+    if (confirmSwap) {
+      setFrom(to);
+      setTo(from);
+    }
   };
 
   // Handle Search

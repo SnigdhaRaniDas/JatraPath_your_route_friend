@@ -5,6 +5,7 @@ import { RouteSearchResult } from "@/type/transport";
 import { useState } from "react";
 import RouteMapPreview from "./RouteMapPreview";
 import RouteMap from "./RouteMap";
+import { fareData } from "@/app/data/faredata"; // import your fare data
 
 interface RouteDetailsModalProps {
   result: RouteSearchResult;
@@ -15,9 +16,20 @@ export function RouteDetailsModal({ result, onClose }: RouteDetailsModalProps) {
   const stops = result.stops ?? [];
   const stopsCount = stops.length;
 
-  const fare = stopsCount > 1 ? result.fareMatrix?.[stops[0]]?.[stops[stopsCount - 1]] ?? 40 : 0;
-  const studentFare = Math.round(fare * 0.6);
+  // Dynamic fare calculation
+  let fare = 0;
+  if (stopsCount >= 2 && result.id && fareData[result.id]) {
+    const firstStop = stops[0];
+    const lastStop = stops[stopsCount - 1];
+    const busFareMap = fareData[result.id];
 
+    const firstStopFare = busFareMap[firstStop] ?? 0;
+    const lastStopFare = busFareMap[lastStop] ?? 0;
+
+    fare = Math.abs(lastStopFare - firstStopFare); // ensures positive fare
+  }
+
+  const studentFare = Math.round(fare * 0.6);
   const [fullMapOpen, setFullMapOpen] = useState(false);
 
   return (

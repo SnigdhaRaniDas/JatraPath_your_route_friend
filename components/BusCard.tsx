@@ -2,6 +2,7 @@
 
 import { Bus, MapPin, User, GraduationCap, Clock } from "lucide-react";
 import { RouteSearchResult } from "@/type/transport";
+import { fareData } from "@/app/data/faredata"; // your fareData
 
 interface BusCardProps {
   result: RouteSearchResult;
@@ -12,8 +13,26 @@ export default function BusCard({ result, onViewDetails }: BusCardProps) {
   const stops = Array.isArray(result.stops) ? result.stops : [];
   const stopsCount = stops.length;
 
-  const fare = 40; // temporary
+  // Dynamic fare calculation (handles reverse routes)
+  let fare = 0;
+  if (stopsCount >= 2 && result.id && fareData[result.id]) {
+    const firstStop = stops[0];
+    const lastStop = stops[stopsCount - 1];
+    const busFareMap = fareData[result.id];
+
+    const firstStopFare = busFareMap[firstStop] ?? 0;
+    const lastStopFare = busFareMap[lastStop] ?? 0;
+
+    fare = Math.abs(lastStopFare - firstStopFare); // always positive
+
+    // ✅ Adjust fare if it's 5 TK
+    if (fare === 5) fare = 10;
+  }
+
   const studentFare = Math.round(fare * 0.6);
+
+  // ✅ Adjust student fare if regular fare is 10 (from previous 5)
+  const adjustedStudentFare = fare === 10 && studentFare < 10 ? 10 : studentFare;
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
@@ -59,7 +78,7 @@ export default function BusCard({ result, onViewDetails }: BusCardProps) {
           </div>
           <div className="flex items-center gap-1.5">
             <GraduationCap className="w-4 h-4 text-gray-500" />
-            <span className="text-sm font-medium">৳{studentFare}</span>
+            <span className="text-sm font-medium">৳{adjustedStudentFare}</span>
           </div>
         </div>
 

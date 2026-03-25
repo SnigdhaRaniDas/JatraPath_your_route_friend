@@ -1,10 +1,6 @@
 // src/data/fareData.ts
 export type FareMap = Record<string, Record<string, number>>;
-
-/**
- * fareData[busId][stopName] = cumulative fare from first stop
- * Example: Savar_Paribahan stops fare
- */
+  
 export const fareData: FareMap = {
   Savar_Paribahan: {
     Chandra: 0,

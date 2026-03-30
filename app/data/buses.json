@@ -98,7 +98,7 @@
     "id": "Victor_Classic",
     "name": "ভিক্টর ক্লাসিক",
     "stops": [
-      "Sadarghat",
+      "Sadar Ghat",
       "Ray Saheb Bazar",
       "Naya Bazar",
       "Golap Shah Mazar",
@@ -106,7 +106,7 @@
       "Paltan",
       "Kakrail",
       "Shantinagar",
-      "Malibaag Moor",
+      "Malibagh Moor",
       "Mouchak",
       "Malibagh Railgate",
       "Hazipara",
@@ -126,8 +126,7 @@
       "Jashimuddin",
       "Rajlakshmi",
       "House Building",
-      "Abdullahpur",
-      "Kamarpara"
+      "Abdullahpur"
     ]
   },
   {
@@ -150,6 +149,7 @@
       "Bashtola",
       "Uttar Badda",
       "Badda",
+      "Moddho Badda",
       "Merul Badda",
       "Rampura Bridge",
       "Rampura Bazar",
@@ -157,8 +157,8 @@
       "Khilgaon",
       "Bashabo",
       "Mugdapara",
+      "Golapbagh",
       "Sayapabad",
-      "Janapoth Moor",
       "Jatrabari",
       "Dholairpar",
       "Postogola"

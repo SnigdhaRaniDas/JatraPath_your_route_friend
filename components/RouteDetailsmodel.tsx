@@ -4,8 +4,9 @@
 import { X, Bus, User, GraduationCap } from "lucide-react";
 import { RouteSearchResult } from "@/type/transport";
 import { useState } from "react";
-import RouteMapPreview from "./RouteMapPreview";
-import RouteMap from "./RouteMap";
+import dynamic from "next/dynamic";
+const RouteMapPreview = dynamic(() => import("./RouteMapPreview"), { ssr: false });
+const RouteMap = dynamic(() => import("./RouteMap"), { ssr: false });
 import { fareData } from "@/app/data/faredata";
 
 interface RouteDetailsModalProps {

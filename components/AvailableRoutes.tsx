@@ -26,8 +26,9 @@ export default function AvailableRoutes({
   const [selectedRoute, setSelectedRoute] = useState<RouteSearchResult | null>(null);
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section id="fare-info" className="py-12 bg-gray-50 scroll-mt-24">
       <div className="bg-white/90 rounded-2xl shadow-xl w-full max-w-6xl mx-auto p-8 ring-1 ring-sky-300">
+        
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -38,6 +39,7 @@ export default function AvailableRoutes({
                   : "No Routes Found"
                 : "Available Routes"}
             </h2>
+
             <p className="text-sm text-sky-800 mt-1">
               {!hasSearched
                 ? "Search for routes to see available buses"
@@ -46,12 +48,15 @@ export default function AvailableRoutes({
                 : `No direct routes available from ${searchFrom} to ${searchTo}`}
             </p>
           </div>
+
           {hasSearched && results.length > 0 && (
             <button
               onClick={onAddToFavorites}
               disabled={isFavorite}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
-                isFavorite ? "bg-gray-100 text-gray-400" : "bg-blue-600 text-white hover:bg-blue-700"
+                isFavorite
+                  ? "bg-gray-100 text-gray-400"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
               <Star className="w-4 h-4" />
@@ -82,7 +87,7 @@ export default function AvailableRoutes({
         )}
       </div>
 
-      {/* RouteDetailsModal */}
+      {/* Modal */}
       {selectedRoute && (
         <RouteDetailsModal
           result={selectedRoute}

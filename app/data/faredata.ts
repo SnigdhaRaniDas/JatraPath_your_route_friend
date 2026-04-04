@@ -105,7 +105,7 @@ export const fareData: FareMap = {
     Shantinagar: 50,
     Kakrail: 50,
     Paltan: 50,
-    GPO: 50,
+    GPO: 55,
     "Golap Shah Mazar": 55,
     "Naya Bazar": 55,
     "Ray Saheb Bazar": 60,
@@ -136,7 +136,7 @@ export const fareData: FareMap = {
     Golapbagh: 60,
     Sayapabad: 60,
     Jatrabari: 60,
-    Dholairpar: 60,
-    Postogola: 60,
+    Dholairpar: 65,
+    Postogola: 65,
   },
 };

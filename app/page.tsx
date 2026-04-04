@@ -9,6 +9,7 @@ import { RouteSearchResult } from "@/type/transport";
 import { RouteDetailsModal } from "@/components/RouteDetailsmodel";
 import RouteMapPreview from "@/components/RouteMapPreview";
 
+
 export default function Home() {
   const [results, setResults] = useState<RouteSearchResult[]>([]);
   

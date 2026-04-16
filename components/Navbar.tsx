@@ -61,12 +61,7 @@ export default function Navbar() {
               Contact
             </button>
 
-            <button
-              onClick={() => router.push("/about")}
-              className="hover:text-blue-600 transition-colors"
-            >
-              About
-            </button>
+            
           </div>
 
           {/* CTA Button */}

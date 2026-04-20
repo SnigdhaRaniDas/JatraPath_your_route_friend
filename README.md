@@ -41,7 +41,6 @@ JatraPath/
 🚀 Getting Started
 
 1. Clone the repo
-git clone https://github.com/your-username/JatraPath.git
 cd JatraPath
 2. Install dependencies
 npm install
